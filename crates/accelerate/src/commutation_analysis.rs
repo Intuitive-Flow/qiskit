@@ -61,7 +61,7 @@ pub(crate) fn analyze_commutations_inner(
     for qubit in 0..dag.num_qubits() {
         let wire = Wire::Qubit(Qubit(qubit as u32));
 
-        for current_gate_idx in dag.nodes_on_wire(py, &wire, false) {
+        for current_gate_idx in dag.nodes_on_wire(&wire, false) {
             // get the commutation set associated with the current wire, or create a new
             // index set containing the current gate
             let commutation_entry = commutation_set
@@ -80,7 +80,7 @@ pub(crate) fn analyze_commutations_inner(
                     // if the node is an input/output node, they do not commute, so we only
                     // continue if the nodes are operation nodes
                     if let (NodeType::Operation(packed_inst0), NodeType::Operation(packed_inst1)) =
-                        (&dag.dag()[current_gate_idx], &dag.dag()[*prev_gate_idx])
+                        (&dag[current_gate_idx], &dag[*prev_gate_idx])
                     {
                         let op1 = packed_inst0.op.view();
                         let op2 = packed_inst1.op.view();
