@@ -2257,6 +2257,7 @@ dependencies = [
  "anyhow",
  "cbindgen",
  "hashbrown 0.15.5",
+ "regex",
 ]
 
 [[package]]
